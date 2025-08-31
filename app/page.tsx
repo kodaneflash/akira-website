@@ -3,8 +3,8 @@ import HeroSection from "@/components/homepage/hero-section"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
-      {/* Hero Section with Animated Background */}
+    <div className="min-h-screen flex flex-col">
+      {/* Hero Section */}
       <HeroSection />
       
       {/* Additional content sections can go here */}

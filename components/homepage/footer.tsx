@@ -14,15 +14,15 @@ export default function Footer({
   year = new Date().getFullYear()
 }: FooterProps) {
   return (
-    <div className="pb-8 px-8 pt-16 bg-[oklch(0.1398_0_0)]">
+    <div className="pb-8 px-8 pt-16">
       {/* Max-width container that centers and constrains content */}
       <div className="mx-auto max-w-7xl">
         {/* Inner container with border and flex layout */}
-        <div className="items-center border-t-[oklch(0.371_0_0_/_0.5)] border-t-2 justify-between pt-8 flex border-solid">
+        <div className="items-center border-t border-border/50 justify-between pt-8 flex">
           {/* Social links */}
-          <div className="gap-x-6 order-2 flex text-neutral-100">
+          <div className="gap-x-6 order-2 flex text-foreground">
             <a 
-              className="rounded-full border border-neutral-600 bg-neutral-800/30 px-2 py-2 text-neutral-100 transition ease-in-out hover:text-neutral-400 flex items-center justify-center" 
+              className="rounded-full border border-border bg-background/30 px-2 py-2 text-foreground transition ease-in-out hover:text-muted-foreground flex items-center justify-center" 
               href={discordUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -43,7 +43,7 @@ export default function Footer({
               </svg>
             </a>
             <a 
-              className="rounded-full border border-neutral-600 bg-neutral-800/30 px-2 py-2 text-neutral-100 transition ease-in-out hover:text-neutral-400 flex items-center justify-center" 
+              className="rounded-full border border-border bg-background/30 px-2 py-2 text-foreground transition ease-in-out hover:text-muted-foreground flex items-center justify-center" 
               href={twitterUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -66,7 +66,7 @@ export default function Footer({
           </div>
 
           {/* Copyright */}
-          <p className="text-[oklch(0.87_0_0)] text-sm font-bold order-1">
+          <p className="text-muted-foreground text-sm font-bold order-1">
             © {year} {companyName}. All rights reserved.
           </p>
         </div>

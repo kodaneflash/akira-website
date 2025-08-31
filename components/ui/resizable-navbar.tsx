@@ -6,11 +6,19 @@ import {
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
-} from "motion/react";
+} from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { VectorLogo } from "@/components/logos/VectorLogo";
 
+interface NavPillProps {
+  children: React.ReactNode;
+  isActive?: boolean;
+  className?: string;
+  onClick?: () => void;
+  variant?: "default" | "primary";
+}
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -58,7 +66,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   });
   const [visible, setVisible] = useState<boolean>(false);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
+  useMotionValueEvent(scrollY, "change", (latest: number) => {
     if (latest > 100) {
       setVisible(true);
     } else {
@@ -104,8 +112,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         minWidth: "800px",
       }}
       className={cn(
-        "relative z-[95] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-6 py-3 lg:flex",
-        visible && "bg-background/80 backdrop-blur-md border border-border/50 shadow-lg",
+        "relative z-[95] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-6 py-3 lg:flex lg:mt-6 xl:mt-8",
+        visible && "backdrop-blur-md border border-border/50 shadow-lg",
         className,
       )}
     >
@@ -114,34 +122,76 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   );
 };
 
+export const NavPill = ({ children, isActive = false, className, onClick, variant = "default" }: NavPillProps) => {
+  // Primary variant for Sign In button - uses velvet-500 color
+  if (isActive && variant === "primary") {
+    return (
+      <button 
+        className={cn("bg-velvet-500 text-white py-1.5 px-6 relative text-center h-9 rounded-full hover:bg-velvet-600 transition-colors whitespace-nowrap", className)}
+        onClick={onClick}
+      >
+        {children}
+      </button>
+    );
+  }
+
+  if (isActive) {
+    // Active state - uses same approach as primary variant with velvet-500 color
+    return (
+      <button 
+        className={cn("bg-velvet-500 text-white py-1.5 px-6 relative text-center h-9 rounded-full hover:bg-velvet-600 transition-colors whitespace-nowrap", className)}
+        onClick={onClick}
+      >
+        {children}
+      </button>
+    );
+  }
+
+  // Inactive state - simple button without hover effects
+  return (
+    <button 
+      className={cn("py-1.5 px-6 relative text-center h-9 rounded-full text-foreground/70", className)}
+      onClick={onClick}
+    >
+      {children}
+      <span className="absolute inset-0 rounded-full">
+        <span className="flex h-full w-full items-center justify-center rounded-full relative z-10">
+          {children}
+        </span>
+      </span>
+    </button>
+  );
+};
+
 export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
-  const [hovered, setHovered] = useState<number | null>(null);
+  const pathname = usePathname();
+
+  const isActive = (link: string) => {
+    return pathname === link;
+  };
 
   return (
     <motion.div
-      onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-foreground/80 transition duration-200 hover:text-foreground lg:flex lg:space-x-2",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-foreground/80 transition duration-200 lg:flex lg:space-x-2",
         className,
       )}
     >
-      {items.map((item, idx) => (
-        <Link
-          onMouseEnter={() => setHovered(idx)}
-          onClick={onItemClick}
-          className="relative px-4 py-2 text-foreground/70 hover:text-foreground transition-colors duration-200"
-          key={`link-${idx}`}
-          href={item.link}
-        >
-          {hovered === idx && (
-            <motion.div
-              layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-muted"
-            />
-          )}
-          <span className="relative z-20 font-medium">{item.name}</span>
-        </Link>
-      ))}
+      {items.map((item, idx) => {
+        const active = isActive(item.link);
+        return (
+          <Link
+            onClick={onItemClick}
+            className="relative items-center cursor-pointer justify-center flex"
+            key={`link-${idx}`}
+            href={item.link}
+          >
+            <NavPill isActive={active}>
+              {item.name}
+            </NavPill>
+          </Link>
+        );
+      })}
     </motion.div>
   );
 };
@@ -167,7 +217,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
       }}
       className={cn(
         "relative z-[95] mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
-        visible && "bg-background/80 backdrop-blur-md border border-border/50 shadow-lg",
+        visible && "backdrop-blur-md border border-border/50 shadow-lg",
         className,
       )}
     >
@@ -206,7 +256,7 @@ export const MobileNavMenu = ({
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
           className={cn(
-            "absolute inset-x-0 top-16 z-[96] flex w-full flex-col items-start justify-start gap-4 rounded-xl bg-background/95 backdrop-blur-md border border-border/50 px-6 py-8 shadow-lg",
+            "absolute inset-x-0 top-16 z-[96] flex w-full flex-col items-start justify-start gap-4 rounded-xl backdrop-blur-md border border-border/50 px-6 py-8 shadow-lg",
             className,
           )}
         >
