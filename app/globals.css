@@ -5,22 +5,399 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Akira Dark Theme - Velvet on Obsidian */
+:root[data-theme="akira-dark"], 
+:root {
+  /* Core Obsidian Surfaces */
+  --obsidian-950: oklch(0.12 0.02 275); /* #0B0B0E - App background */
+  --obsidian-900: oklch(0.14 0.01 275); /* #111116 - Base surface */
+  --obsidian-800: oklch(0.18 0.01 275); /* #16161D - Elevated surface */
+  --obsidian-700: oklch(0.22 0.01 275); /* #1C1D25 - Hover surface */
+  
+  /* Borders & Dividers */
+  --border: oklch(0.28 0.01 275); /* #282832 - Hairlines */
+  
+  /* Typography */
+  --text-primary: oklch(0.92 0.02 275); /* #EDEDF2 - Main text */
+  --text-muted: oklch(0.77 0.02 275); /* #A8A8B4 - Secondary text */
+  
+  /* Brand Velvet Red */
+  --velvet-700: oklch(0.47 0.17 25); /* #8B0E24 - Brand deep */
+  --velvet-600: oklch(0.55 0.17 25); /* #B1122E - Brand base (primary) */
+  --velvet-500: oklch(0.60 0.17 25); /* #C0163C - Brand hover */
+  --velvet-300: oklch(0.70 0.10 25); /* #E16A7F - Subtle tint */
+  
+  /* Accent Colors */
+  --rose-500: oklch(0.64 0.25 340); /* #D63677 - Playful accent (romance) */
+  --fuchsia-400: oklch(0.67 0.25 320); /* #B646FF - Electric kiss (sparingly) */
+  
+  /* Status Colors */
+  --success-500: oklch(0.68 0.11 170); /* #38D39F - Positive */
+  --warning-500: oklch(0.75 0.12 80); /* #F2B544 - Caution */
+  --danger-500: oklch(0.62 0.21 25); /* #F23F5D - Destructive */
+  
+  /* Semantic Tokens */
+  --color-bg: var(--obsidian-950);
+  --color-surface: var(--obsidian-900);
+  --color-surface-2: var(--obsidian-800);
+  --color-surface-3: var(--obsidian-700);
+  --color-border: var(--border);
+  
+  --color-text: var(--text-primary);
+  --color-muted: var(--text-muted);
+  
+  --color-primary: var(--velvet-600);
+  --color-primary-700: var(--velvet-700);
+  --color-primary-500: var(--velvet-500);
+  
+  --color-accent: var(--rose-500);
+  --color-accent-2: var(--fuchsia-400);
+  
+  /* Shadow Effects */
+  --shadow-glow: 0 0 24px color-mix(in oklch, var(--color-primary) 35%, transparent);
+  
+  /* Signature Gradients */
+  --gradient-velvet-bloom: linear-gradient(135deg, var(--velvet-700) 0%, var(--velvet-600) 40%, var(--velvet-500) 100%);
+  --gradient-obsidian-sheen: linear-gradient(180deg, color-mix(in oklch, transparent, black 30%) 0%, transparent 60%);
+  --gradient-rose-kiss: linear-gradient(135deg, var(--rose-500), var(--fuchsia-400));
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  /* Legacy fallbacks */
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  
+  /* Akira Color System for Tailwind */
+  --color-obsidian-950: var(--obsidian-950);
+  --color-obsidian-900: var(--obsidian-900);
+  --color-obsidian-800: var(--obsidian-800);
+  --color-obsidian-700: var(--obsidian-700);
+  
+  --color-velvet-700: var(--velvet-700);
+  --color-velvet-600: var(--velvet-600);
+  --color-velvet-500: var(--velvet-500);
+  --color-velvet-300: var(--velvet-300);
+  
+  --color-rose-500: var(--rose-500);
+  --color-fuchsia-400: var(--fuchsia-400);
+  
+  --color-success-500: var(--success-500);
+  --color-warning-500: var(--warning-500);
+  --color-danger-500: var(--danger-500);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  
+  /* Custom Animation Keyframes */
+  --animate-fade-in: fade-in 0.5s ease-in-out;
+  --animate-fade-out: fade-out 0.5s ease-in-out;
+  --animate-slide-in-up: slide-in-up 0.6s ease-out;
+  --animate-slide-in-down: slide-in-down 0.6s ease-out;
+  --animate-slide-in-left: slide-in-left 0.6s ease-out;
+  --animate-slide-in-right: slide-in-right 0.6s ease-out;
+  --animate-scale-in: scale-in 0.4s ease-out;
+  --animate-scale-out: scale-out 0.4s ease-in;
+  --animate-rotate-in: rotate-in 0.6s ease-out;
+  --animate-bounce-in: bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --animate-pulse-slow: pulse-slow 3s ease-in-out infinite;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-typewriter: typewriter 3s steps(40, end);
+  --animate-gradient: gradient 3s ease infinite;
+
+  /* Define keyframes within @theme */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes slide-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-in-down {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes scale-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+  }
+
+  @keyframes rotate-in {
+    from {
+      opacity: 0;
+      transform: rotate(-180deg) scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes bounce-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+    }
+    to {
+      text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes typewriter {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+}
+
+/* Dark theme is now the default - no media query needed */
+
+
+
+/* Utility Classes for Animations */
+.animate-fade-in { animation: var(--animate-fade-in); }
+.animate-fade-out { animation: var(--animate-fade-out); }
+.animate-slide-in-up { animation: var(--animate-slide-in-up); }
+.animate-slide-in-down { animation: var(--animate-slide-in-down); }
+.animate-slide-in-left { animation: var(--animate-slide-in-left); }
+.animate-slide-in-right { animation: var(--animate-slide-in-right); }
+.animate-scale-in { animation: var(--animate-scale-in); }
+.animate-scale-out { animation: var(--animate-scale-out); }
+.animate-rotate-in { animation: var(--animate-rotate-in); }
+.animate-bounce-in { animation: var(--animate-bounce-in); }
+.animate-pulse-slow { animation: var(--animate-pulse-slow); }
+.animate-float { animation: var(--animate-float); }
+.animate-glow { animation: var(--animate-glow); }
+.animate-shimmer { 
+  animation: var(--animate-shimmer);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background-size: 200% 100%;
+}
+.animate-typewriter { 
+  animation: var(--animate-typewriter);
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid currentColor;
+}
+.animate-gradient {
+  animation: var(--animate-gradient);
+  background-size: 200% 200%;
+}
+
+/* Animation Delays */
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-500 { animation-delay: 500ms; }
+.animate-delay-700 { animation-delay: 700ms; }
+.animate-delay-1000 { animation-delay: 1000ms; }
+
+/* Animation Durations */
+.animate-duration-75 { animation-duration: 75ms; }
+.animate-duration-100 { animation-duration: 100ms; }
+.animate-duration-150 { animation-duration: 150ms; }
+.animate-duration-200 { animation-duration: 200ms; }
+.animate-duration-300 { animation-duration: 300ms; }
+.animate-duration-500 { animation-duration: 500ms; }
+.animate-duration-700 { animation-duration: 700ms; }
+.animate-duration-1000 { animation-duration: 1000ms; }
+
+/* Scroll Animation Utilities */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-animate.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+/* Akira Color Utility Classes */
+.bg-obsidian-950 { background-color: var(--obsidian-950); }
+.bg-obsidian-900 { background-color: var(--obsidian-900); }
+.bg-obsidian-800 { background-color: var(--obsidian-800); }
+.bg-obsidian-700 { background-color: var(--obsidian-700); }
+
+.bg-velvet-700 { background-color: var(--velvet-700); }
+.bg-velvet-600 { background-color: var(--velvet-600); }
+.bg-velvet-500 { background-color: var(--velvet-500); }
+.bg-velvet-300 { background-color: var(--velvet-300); }
+
+.bg-rose-500 { background-color: var(--rose-500); }
+.bg-fuchsia-400 { background-color: var(--fuchsia-400); }
+
+.text-primary { color: var(--text-primary); }
+.text-muted { color: var(--text-muted); }
+.text-velvet-600 { color: var(--velvet-600); }
+.text-velvet-500 { color: var(--velvet-500); }
+.text-rose-500 { color: var(--rose-500); }
+
+.border-obsidian { border-color: var(--border); }
+.border-velvet-600 { border-color: var(--velvet-600); }
+
+/* Signature Gradient Classes */
+.bg-gradient-velvet-bloom { background: var(--gradient-velvet-bloom); }
+.bg-gradient-obsidian-sheen { background: var(--gradient-obsidian-sheen); }
+.bg-gradient-rose-kiss { background: var(--gradient-rose-kiss); }
+
+/* Glow Effects */
+.shadow-glow { box-shadow: var(--shadow-glow); }
+.shadow-velvet-glow { box-shadow: 0 0 24px color-mix(in oklch, var(--velvet-600) 25%, transparent); }
+.shadow-rose-glow { box-shadow: 0 0 20px color-mix(in oklch, var(--rose-500) 20%, transparent); }
+
+/* Custom Typography Classes */
+@utility text-bodytext {
+  margin-inline: auto;
+  max-width: --spacing(128); /* max-w-lg equivalent */
+  padding-block: --spacing(4);
+  text-align: center;
+  font-size: 18px;
+  font-weight: var(--font-weight-light);
+  line-height: 1.75; /* leading-7 equivalent */
+  color: var(--text-muted);
+  
+  @media (min-width: 1024px) {
+    font-size: 20px;
+    line-height: 2; /* leading-8 equivalent */
+  }
 }
