@@ -1,18 +1,17 @@
 import FooterSection from "@/components/homepage/footer"
+import HeroSection from "@/components/homepage/hero-section"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-obsidian-950 text-primary flex flex-col">
-      <main className="flex-1 p-8">
-        <div className="max-w-6xl mx-auto">
-          <header className="text-center space-y-4">
-            <h1 className="text-5xl font-bold bg-gradient-velvet-bloom bg-clip-text text-transparent">
-              Welcome to Akira
-            </h1>
-            <p className="text-muted text-lg">Modern web application</p>
-          </header>
-        </div>
+    <div className="min-h-screen bg-black text-white flex flex-col">
+      {/* Hero Section with Animated Background */}
+      <HeroSection />
+      
+      {/* Additional content sections can go here */}
+      <main className="flex-1">
+        {/* Future content sections */}
       </main>
+      
       <FooterSection />
     </div>
   )

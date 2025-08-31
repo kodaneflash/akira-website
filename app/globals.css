@@ -1,273 +1,89 @@
 @import "tailwindcss";
 
+/* --- Dark-only: candy.ai-inspired palette --- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #131313; /* rgb(19,19,19) */
+  --foreground: #ffffff;
 }
 
-/* Akira Dark Theme - Velvet on Obsidian */
-:root[data-theme="akira-dark"], 
+/* Candy Dark Theme */
+:root[data-theme="candy-dark"],
 :root {
-  /* Core Obsidian Surfaces */
-  --obsidian-950: oklch(0.12 0.02 275); /* #0B0B0E - App background */
-  --obsidian-900: oklch(0.14 0.01 275); /* #111116 - Base surface */
-  --obsidian-800: oklch(0.18 0.01 275); /* #16161D - Elevated surface */
-  --obsidian-700: oklch(0.22 0.01 275); /* #1C1D25 - Hover surface */
-  
+  /* Core Surfaces */
+  --obsidian-950: #131313;           /* App background */
+  --obsidian-900: #1A1A1A;           /* Card background */
+  --obsidian-800: #171717;           /* Deeper surface */
+  --obsidian-700: #1F1F1F;           /* Hover surface */
+
   /* Borders & Dividers */
-  --border: oklch(0.28 0.01 275); /* #282832 - Hairlines */
-  
+  --border: #363636;                 /* rgb(54,54,54) */
+
   /* Typography */
-  --text-primary: oklch(0.92 0.02 275); /* #EDEDF2 - Main text */
-  --text-muted: oklch(0.77 0.02 275); /* #A8A8B4 - Secondary text */
-  
-  /* Brand Velvet Red */
-  --velvet-700: oklch(0.47 0.17 25); /* #8B0E24 - Brand deep */
-  --velvet-600: oklch(0.55 0.17 25); /* #B1122E - Brand base (primary) */
-  --velvet-500: oklch(0.60 0.17 25); /* #C0163C - Brand hover */
-  --velvet-300: oklch(0.70 0.10 25); /* #E16A7F - Subtle tint */
-  
-  /* Accent Colors */
-  --rose-500: oklch(0.64 0.25 340); /* #D63677 - Playful accent (romance) */
-  --fuchsia-400: oklch(0.67 0.25 320); /* #B646FF - Electric kiss (sparingly) */
-  
-  /* Status Colors */
-  --success-500: oklch(0.68 0.11 170); /* #38D39F - Positive */
-  --warning-500: oklch(0.75 0.12 80); /* #F2B544 - Caution */
-  --danger-500: oklch(0.62 0.21 25); /* #F23F5D - Destructive */
-  
+  --text-primary: #FFFFFF;           /* headings / strong */
+  --text-muted: #A4A4A4;             /* body text rgb(164,164,164) */
+
+  /* Brand Pinks (from screenshots/spec) */
+  --velvet-700: #EC5A7A;             /* rgb(236,90,122) – used widely */
+  --velvet-600: #F97086;             /* logo .ai pink (#F97086) */
+  --velvet-500: #F97187;             /* CTA button rgb(249,113,135) */
+  --velvet-300: color-mix(in srgb, var(--velvet-600) 60%, white 40%); /* subtle tint */
+
+  /* (Not used on candy.ai but kept for compatibility) */
+  --rose-500: var(--velvet-700);
+  --fuchsia-400: color-mix(in srgb, var(--velvet-600) 55%, #B646FF 45%);
+
   /* Semantic Tokens */
   --color-bg: var(--obsidian-950);
   --color-surface: var(--obsidian-900);
   --color-surface-2: var(--obsidian-800);
   --color-surface-3: var(--obsidian-700);
   --color-border: var(--border);
-  
+
   --color-text: var(--text-primary);
   --color-muted: var(--text-muted);
-  
-  --color-primary: var(--velvet-600);
-  --color-primary-700: var(--velvet-700);
-  --color-primary-500: var(--velvet-500);
-  
-  --color-accent: var(--rose-500);
-  --color-accent-2: var(--fuchsia-400);
-  
-  /* Shadow Effects */
-  --shadow-glow: 0 0 24px color-mix(in oklch, var(--color-primary) 35%, transparent);
-  
-  /* Signature Gradients */
-  --gradient-velvet-bloom: linear-gradient(135deg, var(--velvet-700) 0%, var(--velvet-600) 40%, var(--velvet-500) 100%);
-  --gradient-obsidian-sheen: linear-gradient(180deg, color-mix(in oklch, transparent, black 30%) 0%, transparent 60%);
-  --gradient-rose-kiss: linear-gradient(135deg, var(--rose-500), var(--fuchsia-400));
+
+  /* Primary maps to candy pinks */
+  --color-primary: var(--velvet-600);       /* base pink (#F97086) */
+  --color-primary-700: var(--velvet-700);   /* darker UI pink */
+  --color-primary-500: var(--velvet-500);   /* CTA pink */
+
+  --color-accent: var(--velvet-700);        /* alias */
+  --color-accent-2: var(--velvet-500);      /* alias */
+
+  /* Glow matches pink UI */
+  --shadow-glow: 0 0 24px color-mix(in srgb, var(--color-primary) 35%, transparent);
+
+  /* Signature Gradients (seen on CTA / hero) */
+  --gradient-velvet-bloom: linear-gradient(135deg, var(--velvet-700) 0%, var(--velvet-600) 45%, var(--velvet-500) 100%);
+  --gradient-obsidian-sheen: linear-gradient(180deg, color-mix(in srgb, transparent 70%, black) 0%, transparent 60%);
+  --gradient-rose-kiss: linear-gradient(135deg, var(--velvet-700), var(--velvet-500));
 }
 
+/* Tailwind @theme bindings (unchanged API, now point to candy colors) */
 @theme {
-  /* Legacy fallbacks */
   --color-background: var(--color-bg);
   --color-foreground: var(--color-text);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  
-  /* Akira Color System for Tailwind */
+
   --color-obsidian-950: var(--obsidian-950);
   --color-obsidian-900: var(--obsidian-900);
   --color-obsidian-800: var(--obsidian-800);
   --color-obsidian-700: var(--obsidian-700);
-  
+
   --color-velvet-700: var(--velvet-700);
   --color-velvet-600: var(--velvet-600);
   --color-velvet-500: var(--velvet-500);
   --color-velvet-300: var(--velvet-300);
-  
+
   --color-rose-500: var(--rose-500);
   --color-fuchsia-400: var(--fuchsia-400);
-  
-  --color-success-500: var(--success-500);
-  --color-warning-500: var(--warning-500);
-  --color-danger-500: var(--danger-500);
-  
+
+  --color-success-500: #38D39F;
+  --color-warning-500: #F2B544;
+  --color-danger-500:  #F23F5D;
+
   --color-text-primary: var(--text-primary);
   --color-text-muted: var(--text-muted);
   --color-border: var(--border);
-  
-  /* Custom Animation Keyframes */
-  --animate-fade-in: fade-in 0.5s ease-in-out;
-  --animate-fade-out: fade-out 0.5s ease-in-out;
-  --animate-slide-in-up: slide-in-up 0.6s ease-out;
-  --animate-slide-in-down: slide-in-down 0.6s ease-out;
-  --animate-slide-in-left: slide-in-left 0.6s ease-out;
-  --animate-slide-in-right: slide-in-right 0.6s ease-out;
-  --animate-scale-in: scale-in 0.4s ease-out;
-  --animate-scale-out: scale-out 0.4s ease-in;
-  --animate-rotate-in: rotate-in 0.6s ease-out;
-  --animate-bounce-in: bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  --animate-pulse-slow: pulse-slow 3s ease-in-out infinite;
-  --animate-float: float 3s ease-in-out infinite;
-  --animate-glow: glow 2s ease-in-out infinite alternate;
-  --animate-shimmer: shimmer 2s linear infinite;
-  --animate-typewriter: typewriter 3s steps(40, end);
-  --animate-gradient: gradient 3s ease infinite;
-
-  /* Define keyframes within @theme */
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes fade-out {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
-
-  @keyframes slide-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slide-in-down {
-    from {
-      opacity: 0;
-      transform: translateY(-100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slide-in-left {
-    from {
-      opacity: 0;
-      transform: translateX(-100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slide-in-right {
-    from {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes scale-in {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes scale-out {
-    from {
-      opacity: 1;
-      transform: scale(1);
-    }
-    to {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-  }
-
-  @keyframes rotate-in {
-    from {
-      opacity: 0;
-      transform: rotate(-180deg) scale(0.8);
-    }
-    to {
-      opacity: 1;
-      transform: rotate(0deg) scale(1);
-    }
-  }
-
-  @keyframes bounce-in {
-    0% {
-      opacity: 0;
-      transform: scale(0.3);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-    70% {
-      transform: scale(0.9);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes pulse-slow {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.5;
-    }
-  }
-
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  @keyframes glow {
-    from {
-      text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
-    }
-    to {
-      text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
-    }
-  }
-
-  @keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
-  }
-
-  @keyframes typewriter {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
-  }
-
-  @keyframes gradient {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
 }
 
 /* Dark theme is now the default - no media query needed */
@@ -345,12 +161,22 @@
   }
 }
 
+/* Dark by default */
 body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   min-height: 100vh;
 }
+
+/* Utilities that mirror candy.ai look */
+.bg-card         { background: var(--color-surface); }
+.bg-app          { background: var(--color-bg); }
+.text-muted      { color: var(--color-muted); }
+.border-default  { border-color: var(--color-border); }
+.btn-primary     { background: var(--velvet-500); color: #fff; box-shadow: var(--shadow-glow); }
+.btn-primary:hover { filter: brightness(1.06); }
+.badge-accent    { background: var(--velvet-700); color:#fff; border:1px solid color-mix(in srgb, var(--velvet-700) 40%, var(--color-border)); }
 
 /* Akira Color Utility Classes */
 .bg-obsidian-950 { background-color: var(--obsidian-950); }

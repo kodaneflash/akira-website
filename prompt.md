@@ -131,77 +131,77 @@ Ensure responsive design across breakpoints
 
 Use CSS variables for theme customization
 
-Akira Color Palette Rules (Dark Intimate Velvet-on-Obsidian)
+Candy.ai Color Palette Rules (Dark-only: candy.ai-inspired)
 
 Core Surface Hierarchy
-- obsidian-950: App background (primary canvas)
-- obsidian-900: Base surface (cards, containers)
-- obsidian-800: Elevated surface (modals, dropdowns)
-- obsidian-700: Hover surface (interactive states)
+- obsidian-950: #131313 - App background (rgb(19,19,19))
+- obsidian-900: #1A1A1A - Card background (rgb(26,26,26))
+- obsidian-800: #171717 - Deeper surface
+- obsidian-700: #1F1F1F - Hover surface
 
 Typography Hierarchy
-- text-primary: Main text content (high contrast)
-- text-muted: Secondary text, descriptions, captions
-- text-velvet-600: Brand-colored headings and emphasis
-- text-velvet-500: Interactive links and accents
+- text-primary: #FFFFFF - Headings and strong text (white)
+- text-muted: #A4A4A4 - Body text (rgb(164,164,164))
+- text-velvet-600: #F97086 - Brand accent text (logo pink)
+- text-velvet-700: #EC5A7A - UI pink text
 
-Brand Color Usage
-- velvet-700: Deep brand moments (hero backgrounds)
-- velvet-600: Primary brand actions (main CTAs)
-- velvet-500: Hover states and secondary actions
-- velvet-300: Subtle brand tints (highlights, badges)
-
-Accent Color Guidelines
-- rose-500: Romantic/playful accents (sparingly)
-- fuchsia-400: Electric moments (very selective use)
-- Use accents for maximum 5-10% of interface elements
+Brand Pink Usage (Candy.ai Signature Colors)
+- velvet-700: #EC5A7A - UI pink (rgb(236,90,122)) - used widely throughout UI
+- velvet-600: #F97086 - Logo ".ai" pink - brand identity color
+- velvet-500: #F97187 - CTA button pink (rgb(249,113,135))
+- velvet-300: Subtle pink tint (color-mix with white)
 
 Border and Divider Strategy
-- border-obsidian: Primary borders, hairlines, dividers
+- border: #363636 - Primary borders (rgb(54,54,54))
 - border-velvet-600: Active/focused state borders
-- Subtle borders maintain visual hierarchy without harsh lines
+- Consistent border colors maintain candy.ai's clean aesthetic
 
-Signature Gradients
+Signature Gradients (Candy.ai Style)
 - bg-gradient-velvet-bloom: Primary CTAs, hero sections
-- bg-gradient-obsidian-sheen: Card overlays, header effects
-- bg-gradient-rose-kiss: Toggle switches, sliders, progress bars
+- bg-gradient-obsidian-sheen: Card overlays, subtle effects
+- bg-gradient-rose-kiss: Special elements, accents
 
 Shadow and Glow Effects
-- shadow-glow: Primary brand elements (buttons, key features)
-- shadow-velvet-glow: Brand-specific glows
-- shadow-rose-glow: Accent element highlights
-- Use glows sparingly for emphasis and hierarchy
+- shadow-glow: Pink glow for primary elements (matches candy.ai buttons)
+- Use pink-tinted glows to match candy.ai's signature style
+- Apply glows to CTAs and key interactive elements
 
 Interactive State Patterns
-- Default: obsidian-800 background
-- Hover: obsidian-700 background
-- Active: obsidian-700 + velvet-600 border
-- Focus: velvet-600 border + subtle glow
-- Disabled: obsidian-800 + text-muted + reduced opacity
+- Default: obsidian-900 background (card color)
+- Hover: obsidian-700 background + brightness filter
+- Active: velvet-600 border
+- Focus: velvet-600 border + pink glow
+- Disabled: reduced opacity + muted colors
 
 Form Element Styling
-- Backgrounds: obsidian-800
-- Borders: border-obsidian (default), border-velvet-600 (focus)
-- Text: text-primary
-- Placeholders: text-muted
-- Focus states: velvet-600 border + subtle glow
+- Backgrounds: obsidian-900 (card background)
+- Borders: #363636 (default), velvet-600 (focus)
+- Text: text-primary (#FFFFFF)
+- Placeholders: text-muted (#A4A4A4)
+- Focus states: velvet-600 border + pink glow
+
+Button Styling (Candy.ai Pattern)
+- Primary buttons: velvet-500 background with glow effect
+- Secondary buttons: velvet-700 background
+- Hover effects: brightness filter (1.06-1.1)
+- Consistent with candy.ai's button aesthetics
 
 Status Color Application
-- success-500: Positive feedback, completed states
-- warning-500: Caution, pending states
-- danger-500: Errors, destructive actions
-- Use status colors only for semantic meaning, not decoration
+- success-500: #38D39F - Positive feedback
+- warning-500: #F2B544 - Caution states  
+- danger-500: #F23F5D - Errors, destructive actions
+- Use status colors semantically, not decoratively
 
 Color Contrast Requirements
 - Maintain WCAG AA compliance (4.5:1 minimum)
-- Primary text on obsidian backgrounds: high contrast
-- Brand colors on dark surfaces: ensure readability
-- Test with colorblind-friendly tools
+- White text (#FFFFFF) on dark backgrounds ensures readability
+- Pink accents provide sufficient contrast on dark surfaces
+- Muted text (#A4A4A4) maintains readability hierarchy
 
 Responsive Color Considerations
-- Colors remain consistent across breakpoints
-- Adjust glow effects on mobile for performance
-- Maintain hierarchy in reduced-color environments
+- Colors remain consistent across all breakpoints
+- Pink glow effects optimized for mobile performance
+- Maintain candy.ai aesthetic at all screen sizes
 
 Accessibility
 Implement proper ARIA attributes
